@@ -1,0 +1,21 @@
+{% for nodes in root_nodes %}
+    <ul>
+        {% for item in nodes %}
+            {% if item == 'open' %}
+                <ul>
+            {% else %}
+                    {% if item == 'close' %}
+                        </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                        <a href="">{{ item.menu_item }}</a>
+                        {% if item.leaf %}
+                            </li>
+                        {% endif %}
+                    {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+{% endfor %}
