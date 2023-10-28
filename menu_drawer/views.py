@@ -8,7 +8,11 @@ class HomeView(generic.View):
     def get(self, request, *args, **kwargs):
         template = kwargs.get('template')
         if template == '1-menu':
-            self.template_name = 'menu_drawer/1 menu.html'
+            self.template_name = 'menu_drawer/1-menu.html'
+        if template == '2-menu':
+            self.template_name = 'menu_drawer/2-menu.html'
+        if template == '3-menu':
+            self.template_name = 'menu_drawer/3-menu.html'
         context = {
 
         }
