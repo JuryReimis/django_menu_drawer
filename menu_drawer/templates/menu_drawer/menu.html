@@ -1,21 +1,30 @@
-{% for nodes in root_nodes %}
-    <ul>
-        {% for item in nodes %}
-            {% if item == 'open' %}
-                <ul>
-            {% else %}
-                    {% if item == 'close' %}
-                        </ul>
-                        </li>
-                    {% else %}
-                        <li>
-                        <a href="">{{ item.menu_item }}</a>
-                        {% if item.leaf %}
-                            </li>
+<div class="container col-6">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            {% for nodes in root_nodes %}
+                <ul class="list-group list-group-flush">
+                    {% for item in nodes %}
+                        {% if item == 'open' %}
+                            <ul class="list-group">
+                        {% else %}
+                            {% if item == 'close' %}
+                                </ul>
+                                </li>
+                            {% else %}
+                                <li class="list-group-item">
+                                    {% if item.menu_item.item_slug == slug %}
+                                        <b>{{ item.menu_item }}</b>
+                                    {% else %}
+                                        <a href="{% url 'home' template='1-menu' slug=item.menu_item.item_slug %}">{{ item.menu_item }}</a>
+                                    {% endif %}
+                                    {% if item.leaf %}
+                                        </li>
+                                    {% endif %}
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-            {% endif %}
-        {% endfor %}
-    </ul>
-
-{% endfor %}
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+</div>
