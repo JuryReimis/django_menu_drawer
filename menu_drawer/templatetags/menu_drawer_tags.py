@@ -7,21 +7,31 @@ register = template.Library()
 
 @register.inclusion_tag('menu_drawer/menu.html', takes_context=True)
 def draw_menu(context, menu_name, *args, **kwargs):
-    def get_tree(root_node: ParentalRelation):
+    def get_tree(root_node: ParentalRelation, must_be_detailed=False):
         tree = {
             'node': root_node,
-            'children': []
+            'children': [],
+            'active': False,
+            'must_be_detailed': must_be_detailed
         }
-        root_node.active = True
+        if root_node.menu_item.item_slug == selected_point:
+            tree['active'] = True
+            must_be_detailed = True
+        else:
+            must_be_detailed = False
         for child in menu:
             if child.parent == root_node.menu_item:
-                tree['children'].append(get_tree(child))
+                child_tree = get_tree(child, must_be_detailed)
+                if child_tree.get('active'):
+                    tree['active'] = True
+                tree['children'].append(child_tree)
         return tree
 
     def convert_tree_in_list(tree):
         children = tree.get('children')
         tree_node = tree.get('node')
-        if children:
+        detailed = tree.get('active')
+        if children and (detailed or tree.get('must_be_detailed')):
             tree_node.leaf = False
             yield tree_node
             yield 'open'
