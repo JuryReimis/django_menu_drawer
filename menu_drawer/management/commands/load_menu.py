@@ -1,4 +1,5 @@
 from django.core.management import BaseCommand, CommandError
+from django.db import IntegrityError
 from slugify import slugify
 
 from menu_drawer.models import Menu, MenuItem, ParentalRelation
@@ -49,9 +50,12 @@ class Command(BaseCommand):
             menu_title = data.get('menu_title')
             menu_items = data.get('menu_items')
             if menu_title:
-                menu = Menu.objects.create(menu_title=menu_title)
+                try:
+                    menu = Menu.objects.create(menu_title=menu_title)
+                except IntegrityError as error:
+                    raise CommandError(error)
             else:
-                raise Exception('Не удалось обнаружить menu_name')
+                raise CommandError('Не удалось обнаружить menu_name')
 
             self.iterate_children(children=menu_items, menu=menu, parent=None)
 
