@@ -1,6 +1,5 @@
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.text import slugify
 
 
 class Menu(models.Model):
@@ -13,9 +12,6 @@ class Menu(models.Model):
 
 
 class MenuItem(models.Model):
-    def get_slug(self):
-        return slugify(self.item_title)
-
     item_title = models.CharField(
         max_length=100,
     )
