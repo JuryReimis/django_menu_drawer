@@ -25,8 +25,8 @@ pip install -r requirements.txt
 ```
 - Выполните миграции:
 ```bash
-python manage.py makemigrations
-python manage.py migrate
+py manage.py makemigrations
+py manage.py migrate
 ```
 - Перейдите в menu_drawer/management/commands/load_menu.py и создайте свое меню в методе get_menu_dict. После чего запустите команду:
 ```bash
