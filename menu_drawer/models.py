@@ -5,6 +5,8 @@ from django.db import models
 class Menu(models.Model):
     menu_title = models.CharField(
         max_length=100,
+        unique=True,
+        db_index=True
     )
 
     def __str__(self):
@@ -19,7 +21,8 @@ class MenuItem(models.Model):
     item_slug = models.SlugField(
         db_index=True,
         unique=True,
-        verbose_name="URL"
+        verbose_name="URL",
+        null=False,
     )
 
     def __str__(self):
