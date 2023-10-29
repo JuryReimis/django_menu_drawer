@@ -52,6 +52,7 @@ def draw_menu(context, menu_name, *args, **kwargs):
 
     context = {
         'url': url,
-        'root_nodes': root_nodes
+        'root_nodes': root_nodes,
+        'selected': selected_point
     }
     return context
