@@ -1,0 +1,10 @@
+{% extends 'menu_drawer/base.html' %}
+{% load menu_drawer_tags %}
+
+
+{% block menu %}
+    <div class="row justify-content-center">
+    {% draw_menu menu_name='Products' %}
+    {% draw_menu menu_name='Institutes' %}
+    </div>
+{% endblock %}
