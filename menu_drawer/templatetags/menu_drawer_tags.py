@@ -44,13 +44,14 @@ def draw_menu(context, menu_name, *args, **kwargs):
             yield tree_node
 
     menu = ParentalRelation.objects.filter(menu__menu_title=menu_name).select_related('menu', 'menu_item', 'parent')
-    selected_point = context.request.resolver_match.kwargs.get('slug')
+    selected_point = context.request.GET.get('selected')
+    url = context.request.path
     root_nodes = []
     for node in [node for node in menu if node.parent is None]:
         root_nodes.append(convert_tree_in_list(get_tree(node)))
 
     context = {
-        'slug': selected_point,
+        'url': url,
         'root_nodes': root_nodes
     }
     return context
