@@ -1,4 +1,4 @@
-<div class="container col-6">
+<div class="container col">
     <div class="row justify-content-center">
         <div class="col-6">
             {% for nodes in root_nodes %}
@@ -15,7 +15,7 @@
                                     {% if item.menu_item.item_slug == slug %}
                                         <b>{{ item.menu_item }}</b>
                                     {% else %}
-                                        <a href="{% url 'home' template='1-menu' slug=item.menu_item.item_slug %}">{{ item.menu_item }}</a>
+                                        <a href="{{ url }}?selected={{ item.menu_item.item_slug }}">{{ item.menu_item }}</a>
                                     {% endif %}
                                     {% if item.leaf %}
                                         </li>
