@@ -12,7 +12,7 @@
                                 </li>
                             {% else %}
                                 <li class="list-group-item">
-                                    {% if item.menu_item.item_slug == slug %}
+                                    {% if item.menu_item.item_slug == selected %}
                                         <b>{{ item.menu_item }}</b>
                                     {% else %}
                                         <a href="{{ url }}?selected={{ item.menu_item.item_slug }}">{{ item.menu_item }}</a>
